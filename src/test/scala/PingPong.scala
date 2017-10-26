@@ -16,7 +16,7 @@ class Ping extends Simulation {
   val scn1: ScenarioBuilder = scenario("Ping")
       .exec(http("ping").get(s"http://$host/ping").check(substring("pong")))
 
-  val httpConf: HttpProtocolBuilder = http
+  val httpConf: HttpProtocolBuilder = http.connectionHeader("close")
 
   setUp(scn1.inject(constantUsersPerSec(users) during (time minutes))).protocols(httpConf)
 

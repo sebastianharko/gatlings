@@ -39,7 +39,7 @@ class TransactionOnly extends Simulation {
 
   def action: String = "transaction"
 
-  val httpConf: HttpProtocolBuilder = http
+  val httpConf: HttpProtocolBuilder = http.connectionHeader("close")
 
   val scn1: ScenarioBuilder = scenario("One transaction").feed(feeder)
       .exec(

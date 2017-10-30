@@ -43,8 +43,7 @@ class TransactionOnly extends Simulation {
 
   val scn1: ScenarioBuilder = scenario("One transaction").feed(feeder)
       .exec(
-        http("transaction").post(session => s"http://$host/$action/${session("transactionId").as[String]}/${session("from").as[String]}/${session("to").as[String]}/0")
-            .check(substring("true")))
+        http("transaction").post(session => s"http://$host/$action/${session("transactionId").as[String]}/${session("from").as[String]}/${session("to").as[String]}/0"))
 
   setUp(scn1.inject(constantUsersPerSec(users) during (time minutes))).protocols(httpConf)
 
